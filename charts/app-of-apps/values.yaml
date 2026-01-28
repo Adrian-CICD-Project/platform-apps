@@ -85,15 +85,15 @@ applications:
       serverFiles:
         alerts:
           groups:
-            - name: devops-project
+            - name: adrian-java-app
               rules:
-                - alert: DevopsProjectHttp500
+                - alert: AdrianJavaAppHttp500
                   expr: increase(http_server_requests_seconds_count{status="500"}[5m]) > 0
                   for: 0s
                   labels:
                     severity: critical
                   annotations:
-                    summary: "HTTP 5xx detected in devops-project"
+                    summary: "HTTP 5xx detected in adrian-java-app"
                     description: "Wykryto błąd 500"
 
       extraScrapeConfigs: |
@@ -101,7 +101,7 @@ applications:
           metrics_path: /actuator/prometheus
           static_configs:
             - targets:
-                - devops-project.environment-dev.svc.cluster.local:80
+                - adrian-java-app.environment-dev.svc.cluster.local:80
 
   alertmanager:
     enabled: true
