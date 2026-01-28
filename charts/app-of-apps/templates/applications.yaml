@@ -1,0 +1,42 @@
+{{- range $name, $app := .Values.applications }}
+{{- if $app.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ default $name $app.name }}
+  namespace: argocd
+spec:
+  project: default
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: {{ default $name $app.namespace }}
+
+  source:
+    repoURL: {{ $app.helmRepoUrl }}
+    chart: {{ $app.chart }}
+    targetRevision: {{ $app.chartVersion }}
+    helm:
+      {{- if eq $name "monitoring" }}
+      skipCrds: true
+      {{- end }}
+      values: |
+{{ $app.values | indent 8 }}
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+
+  {{- if eq $name "monitoring" }}
+  ignoreDifferences:
+    - group: apiextensions.k8s.io
+      kind: CustomResourceDefinition
+      jsonPointers:
+        - /metadata/annotations
+  {{- end }}
+---
+{{- end }}
+{{- end }}
