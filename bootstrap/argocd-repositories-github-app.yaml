@@ -1,0 +1,175 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: repo-platform-apps
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+type: Opaque
+stringData:
+  url: https://github.com/Adrian-CICD-Project/platform-apps.git
+  type: git
+  project: default
+  # ⚠️ UPDATE REQUIRED: Generate new GitHub App in Adrian-CICD-Project
+  githubAppID: "2593082"
+  githubAppInstallationID: "102594758"
+  githubAppPrivateKey: |
+    ***REMOVED***
+    ***REMOVED***+gEr+61OzXWplhAQoeNOR760XCBIusP5t5H6b5g8Ha2u
+    v9DtUEWGmGu8+GyL0yjYX5hEEWtdEzbBZC5TAzjH4STrq7IoTq9fiy84LY4dtl4U
+    AAuMb2OYi8yYu4tv4ualW8ZYv/kQLSdpnLHus9cpf1iSdUs0SU5kwghh607abX0E
+    esIB0iRxEG5KqGrykp4TOaCr/EpULphAd7F9pjac0maHIChbyv+xJz7tutmftRfC
+    1lBn7gfL1RRdXaL10riT599E+cXUTF6N9G1lHlnTLIG9gBku/EgcHQSXoCstd81s
+    1BwdpTyD547QYlf4gcpvXO3Mr1AW6eo0UDvEJQIDAQABAoIBAEtOILBeQK+mlmKk
+    u//HrBO0vxnZ5m/CaKtZh3E9TZFoK8XyIroxFeHSoI/7yZx59LqpaQML7YBnNZOG
+    tF/m0tfhe56a0Yn1ueahlljP1f5NW746mEPwoDkpOJm1PNbp1qiGQXDeUAZ2yWgm
+    ci+gmNXogjXiYJ13DZ0iq8AWZsqO9XBaybeTndK8IbSHSgytyfbfbtbzITmJ/4NN
+    Qz+++CImyDpkS8tryGHf9WNp7PiL45qjuB7mWqm24Q8XvXlFihiynmZDX6kqWL9J
+    YOlG0Qx68fOIBO9B3+5WD9IOCcUiu61Tk9aoKx7Db8IUSz8iRTDuAzKqW8L2Jp0w
+    aX995H0CgYEA1rZ38Z1YXmbkxG+XJdMnn+YsmIC9i64i5RrKdatrw1WAxPH3gfZD
+    YpTiXCl++lOeWvII7Y8x+woVTpJt7nIcKo67lfoyKZ449qY+Gn2gKsWLpJ5A6X9D
+    cPGZsbd5giDLzVubJ6aEDZzfiLSSkbO6TmlzXKDeMN/2kocX6mk1QRcCgYEA0/4l
+    DH9rRGIJFHZ6zIPOzduWSmZhIxWdmOHKSEs5O1xn3o/LBFFYO95Rk8lXp5rooUpY
+    fUkgBAaCeFXoziV29HPudwazNDL6iT6NbU5tJAiyAtpqjFkXMg37sV2j/MdQ1ShL
+    YfXqUIK1hCnmec5f8RmvTrbO2cjubLxBcilJ0iMCgYArYwXLugrQUKRrmU0GpKt+
+    ISnjyygCILcGaqp8qp4FA7MYmPh1t4iYVBOFohD5jooSQJRTRLtJyhjSHr6+Dyrn
+    4p2/SaZ3SHSkSqWD/tytp+t24U+mn0PGf9uZ0MRp6iykm503nutSQN/epPZ1IMdF
+    7wMTtaIQaEFQDKJliMrtEwKBgQCKekdFRK6TOt7niQVqNueOPVSNQRdOzb3msgdq
+    9ghqqFAJaDCbn29dnDn5qdoiV+SCB4iKPow1VPNBHA05K+vqfxhUlAHXpT1XDY9g
+    yYwtr6hoiLh0+XVXcx7om1yVsLUyqGGlmff3o4pizOQKyS6O1dJYPr4cMU7dpJOz
+    uRjJtQKBgQC2RE3Qj7NtIAXIdwm5bjKh3b4Lpub8DTLHYnzMtIQ+BwkVZ6hlwdBq
+    Kc5HONUM2kdmcLujSUhe2L4Mvdqtxvp8pRp7N4Y/6fE1nMuIOe91z0OjAz/TLysZ
+    GDWwIdNsN7cKRgguEW31sj1gdQlOe9GTWijC5mZ9v739mOQVWxqEng==
+    ***REMOVED***
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: repo-infrastructure-env-dev
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+type: Opaque
+stringData:
+  url: https://github.com/Adrian-CICD-Project/infrastructure-env-dev.git
+  type: git
+  project: default
+  # ⚠️ UPDATE REQUIRED: Generate new GitHub App in Adrian-CICD-Project
+  githubAppID: "2593082"
+  githubAppInstallationID: "102594758"
+  githubAppPrivateKey: |
+    ***REMOVED***
+    ***REMOVED***+gEr+61OzXWplhAQoeNOR760XCBIusP5t5H6b5g8Ha2u
+    v9DtUEWGmGu8+GyL0yjYX5hEEWtdEzbBZC5TAzjH4STrq7IoTq9fiy84LY4dtl4U
+    AAuMb2OYi8yYu4tv4ualW8ZYv/kQLSdpnLHus9cpf1iSdUs0SU5kwghh607abX0E
+    esIB0iRxEG5KqGrykp4TOaCr/EpULphAd7F9pjac0maHIChbyv+xJz7tutmftRfC
+    1lBn7gfL1RRdXaL10riT599E+cXUTF6N9G1lHlnTLIG9gBku/EgcHQSXoCstd81s
+    1BwdpTyD547QYlf4gcpvXO3Mr1AW6eo0UDvEJQIDAQABAoIBAEtOILBeQK+mlmKk
+    u//HrBO0vxnZ5m/CaKtZh3E9TZFoK8XyIroxFeHSoI/7yZx59LqpaQML7YBnNZOG
+    tF/m0tfhe56a0Yn1ueahlljP1f5NW746mEPwoDkpOJm1PNbp1qiGQXDeUAZ2yWgm
+    ci+gmNXogjXiYJ13DZ0iq8AWZsqO9XBaybeTndK8IbSHSgytyfbfbtbzITmJ/4NN
+    Qz+++CImyDpkS8tryGHf9WNp7PiL45qjuB7mWqm24Q8XvXlFihiynmZDX6kqWL9J
+    YOlG0Qx68fOIBO9B3+5WD9IOCcUiu61Tk9aoKx7Db8IUSz8iRTDuAzKqW8L2Jp0w
+    aX995H0CgYEA1rZ38Z1YXmbkxG+XJdMnn+YsmIC9i64i5RrKdatrw1WAxPH3gfZD
+    YpTiXCl++lOeWvII7Y8x+woVTpJt7nIcKo67lfoyKZ449qY+Gn2gKsWLpJ5A6X9D
+    cPGZsbd5giDLzVubJ6aEDZzfiLSSkbO6TmlzXKDeMN/2kocX6mk1QRcCgYEA0/4l
+    DH9rRGIJFHZ6zIPOzduWSmZhIxWdmOHKSEs5O1xn3o/LBFFYO95Rk8lXp5rooUpY
+    fUkgBAaCeFXoziV29HPudwazNDL6iT6NbU5tJAiyAtpqjFkXMg37sV2j/MdQ1ShL
+    YfXqUIK1hCnmec5f8RmvTrbO2cjubLxBcilJ0iMCgYArYwXLugrQUKRrmU0GpKt+
+    ISnjyygCILcGaqp8qp4FA7MYmPh1t4iYVBOFohD5jooSQJRTRLtJyhjSHr6+Dyrn
+    4p2/SaZ3SHSkSqWD/tytp+t24U+mn0PGf9uZ0MRp6iykm503nutSQN/epPZ1IMdF
+    7wMTtaIQaEFQDKJliMrtEwKBgQCKekdFRK6TOt7niQVqNueOPVSNQRdOzb3msgdq
+    9ghqqFAJaDCbn29dnDn5qdoiV+SCB4iKPow1VPNBHA05K+vqfxhUlAHXpT1XDY9g
+    yYwtr6hoiLh0+XVXcx7om1yVsLUyqGGlmff3o4pizOQKyS6O1dJYPr4cMU7dpJOz
+    uRjJtQKBgQC2RE3Qj7NtIAXIdwm5bjKh3b4Lpub8DTLHYnzMtIQ+BwkVZ6hlwdBq
+    Kc5HONUM2kdmcLujSUhe2L4Mvdqtxvp8pRp7N4Y/6fE1nMuIOe91z0OjAz/TLysZ
+    GDWwIdNsN7cKRgguEW31sj1gdQlOe9GTWijC5mZ9v739mOQVWxqEng==
+    ***REMOVED***
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: repo-infrastructure-env-test
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+type: Opaque
+stringData:
+  url: https://github.com/Adrian-CICD-Project/infrastructure-env-test.git
+  type: git
+  project: default
+  # ⚠️ UPDATE REQUIRED: Generate new GitHub App in Adrian-CICD-Project
+  githubAppID: "2593082"
+  githubAppInstallationID: "102594758"
+  githubAppPrivateKey: |
+    ***REMOVED***
+    ***REMOVED***+gEr+61OzXWplhAQoeNOR760XCBIusP5t5H6b5g8Ha2u
+    v9DtUEWGmGu8+GyL0yjYX5hEEWtdEzbBZC5TAzjH4STrq7IoTq9fiy84LY4dtl4U
+    AAuMb2OYi8yYu4tv4ualW8ZYv/kQLSdpnLHus9cpf1iSdUs0SU5kwghh607abX0E
+    esIB0iRxEG5KqGrykp4TOaCr/EpULphAd7F9pjac0maHIChbyv+xJz7tutmftRfC
+    1lBn7gfL1RRdXaL10riT599E+cXUTF6N9G1lHlnTLIG9gBku/EgcHQSXoCstd81s
+    1BwdpTyD547QYlf4gcpvXO3Mr1AW6eo0UDvEJQIDAQABAoIBAEtOILBeQK+mlmKk
+    u//HrBO0vxnZ5m/CaKtZh3E9TZFoK8XyIroxFeHSoI/7yZx59LqpaQML7YBnNZOG
+    tF/m0tfhe56a0Yn1ueahlljP1f5NW746mEPwoDkpOJm1PNbp1qiGQXDeUAZ2yWgm
+    ci+gmNXogjXiYJ13DZ0iq8AWZsqO9XBaybeTndK8IbSHSgytyfbfbtbzITmJ/4NN
+    Qz+++CImyDpkS8tryGHf9WNp7PiL45qjuB7mWqm24Q8XvXlFihiynmZDX6kqWL9J
+    YOlG0Qx68fOIBO9B3+5WD9IOCcUiu61Tk9aoKx7Db8IUSz8iRTDuAzKqW8L2Jp0w
+    aX995H0CgYEA1rZ38Z1YXmbkxG+XJdMnn+YsmIC9i64i5RrKdatrw1WAxPH3gfZD
+    YpTiXCl++lOeWvII7Y8x+woVTpJt7nIcKo67lfoyKZ449qY+Gn2gKsWLpJ5A6X9D
+    cPGZsbd5giDLzVubJ6aEDZzfiLSSkbO6TmlzXKDeMN/2kocX6mk1QRcCgYEA0/4l
+    DH9rRGIJFHZ6zIPOzduWSmZhIxWdmOHKSEs5O1xn3o/LBFFYO95Rk8lXp5rooUpY
+    fUkgBAaCeFXoziV29HPudwazNDL6iT6NbU5tJAiyAtpqjFkXMg37sV2j/MdQ1ShL
+    YfXqUIK1hCnmec5f8RmvTrbO2cjubLxBcilJ0iMCgYArYwXLugrQUKRrmU0GpKt+
+    ISnjyygCILcGaqp8qp4FA7MYmPh1t4iYVBOFohD5jooSQJRTRLtJyhjSHr6+Dyrn
+    4p2/SaZ3SHSkSqWD/tytp+t24U+mn0PGf9uZ0MRp6iykm503nutSQN/epPZ1IMdF
+    7wMTtaIQaEFQDKJliMrtEwKBgQCKekdFRK6TOt7niQVqNueOPVSNQRdOzb3msgdq
+    9ghqqFAJaDCbn29dnDn5qdoiV+SCB4iKPow1VPNBHA05K+vqfxhUlAHXpT1XDY9g
+    yYwtr6hoiLh0+XVXcx7om1yVsLUyqGGlmff3o4pizOQKyS6O1dJYPr4cMU7dpJOz
+    uRjJtQKBgQC2RE3Qj7NtIAXIdwm5bjKh3b4Lpub8DTLHYnzMtIQ+BwkVZ6hlwdBq
+    Kc5HONUM2kdmcLujSUhe2L4Mvdqtxvp8pRp7N4Y/6fE1nMuIOe91z0OjAz/TLysZ
+    GDWwIdNsN7cKRgguEW31sj1gdQlOe9GTWijC5mZ9v739mOQVWxqEng==
+    ***REMOVED***
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: repo-infrastructure-env-prod
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+type: Opaque
+stringData:
+  url: https://github.com/Adrian-CICD-Project/infrastructure-env-prod.git
+  type: git
+  project: default
+  # ⚠️ UPDATE REQUIRED: Generate new GitHub App in Adrian-CICD-Project
+  githubAppID: "2593082"
+  githubAppInstallationID: "102594758"
+  githubAppPrivateKey: |
+    ***REMOVED***
+    ***REMOVED***+gEr+61OzXWplhAQoeNOR760XCBIusP5t5H6b5g8Ha2u
+    v9DtUEWGmGu8+GyL0yjYX5hEEWtdEzbBZC5TAzjH4STrq7IoTq9fiy84LY4dtl4U
+    AAuMb2OYi8yYu4tv4ualW8ZYv/kQLSdpnLHus9cpf1iSdUs0SU5kwghh607abX0E
+    esIB0iRxEG5KqGrykp4TOaCr/EpULphAd7F9pjac0maHIChbyv+xJz7tutmftRfC
+    1lBn7gfL1RRdXaL10riT599E+cXUTF6N9G1lHlnTLIG9gBku/EgcHQSXoCstd81s
+    1BwdpTyD547QYlf4gcpvXO3Mr1AW6eo0UDvEJQIDAQABAoIBAEtOILBeQK+mlmKk
+    u//HrBO0vxnZ5m/CaKtZh3E9TZFoK8XyIroxFeHSoI/7yZx59LqpaQML7YBnNZOG
+    tF/m0tfhe56a0Yn1ueahlljP1f5NW746mEPwoDkpOJm1PNbp1qiGQXDeUAZ2yWgm
+    ci+gmNXogjXiYJ13DZ0iq8AWZsqO9XBaybeTndK8IbSHSgytyfbfbtbzITmJ/4NN
+    Qz+++CImyDpkS8tryGHf9WNp7PiL45qjuB7mWqm24Q8XvXlFihiynmZDX6kqWL9J
+    YOlG0Qx68fOIBO9B3+5WD9IOCcUiu61Tk9aoKx7Db8IUSz8iRTDuAzKqW8L2Jp0w
+    aX995H0CgYEA1rZ38Z1YXmbkxG+XJdMnn+YsmIC9i64i5RrKdatrw1WAxPH3gfZD
+    YpTiXCl++lOeWvII7Y8x+woVTpJt7nIcKo67lfoyKZ449qY+Gn2gKsWLpJ5A6X9D
+    cPGZsbd5giDLzVubJ6aEDZzfiLSSkbO6TmlzXKDeMN/2kocX6mk1QRcCgYEA0/4l
+    DH9rRGIJFHZ6zIPOzduWSmZhIxWdmOHKSEs5O1xn3o/LBFFYO95Rk8lXp5rooUpY
+    fUkgBAaCeFXoziV29HPudwazNDL6iT6NbU5tJAiyAtpqjFkXMg37sV2j/MdQ1ShL
+    YfXqUIK1hCnmec5f8RmvTrbO2cjubLxBcilJ0iMCgYArYwXLugrQUKRrmU0GpKt+
+    ISnjyygCILcGaqp8qp4FA7MYmPh1t4iYVBOFohD5jooSQJRTRLtJyhjSHr6+Dyrn
+    4p2/SaZ3SHSkSqWD/tytp+t24U+mn0PGf9uZ0MRp6iykm503nutSQN/epPZ1IMdF
+    7wMTtaIQaEFQDKJliMrtEwKBgQCKekdFRK6TOt7niQVqNueOPVSNQRdOzb3msgdq
+    9ghqqFAJaDCbn29dnDn5qdoiV+SCB4iKPow1VPNBHA05K+vqfxhUlAHXpT1XDY9g
+    yYwtr6hoiLh0+XVXcx7om1yVsLUyqGGlmff3o4pizOQKyS6O1dJYPr4cMU7dpJOz
+    uRjJtQKBgQC2RE3Qj7NtIAXIdwm5bjKh3b4Lpub8DTLHYnzMtIQ+BwkVZ6hlwdBq
+    Kc5HONUM2kdmcLujSUhe2L4Mvdqtxvp8pRp7N4Y/6fE1nMuIOe91z0OjAz/TLysZ
+    GDWwIdNsN7cKRgguEW31sj1gdQlOe9GTWijC5mZ9v739mOQVWxqEng==
+    ***REMOVED***

@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: platform-apps-test
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Adrian-CICD-Project/platform-apps.git
+    targetRevision: main
+    path: charts/app-of-apps
+    helm:
+      valueFiles:
+        - values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
