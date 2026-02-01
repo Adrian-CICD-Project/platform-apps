@@ -4,7 +4,7 @@ applications:
   #############################################
 
   dependencyTrack:
-    enabled: false
+    enabled: true
     name: dependency-track
     namespace: dependency-track
 
