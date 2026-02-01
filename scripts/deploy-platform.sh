@@ -180,37 +180,35 @@ echo "🔄 Aktualizuję values.yaml (tylko DependencyTrack)..."
 awk -v new_ip="$INGRESS_IP" '
 BEGIN { 
   in_dt = 0
-  indent_level = 0
 }
 
-# Wykryj początek sekcji dependencyTrack
-/^  dependencyTrack:/ { 
+# Wykryj dependencyTrack (dowolne wcięcie)
+/dependencyTrack:/ { 
   in_dt = 1
-  indent_level = 2
   print
   next
 }
 
-# Wykryj koniec sekcji - nowa aplikacja na poziomie 2 spacji
-/^  [a-zA-Z]/ && in_dt == 1 && !/^  dependencyTrack:/ { 
+# Koniec sekcji - kolejna aplikacja na tym samym poziomie (prometheus/sonarqube/alertmanager)
+in_dt == 1 && /^[[:space:]]*(prometheus|sonarqube|alertmanager):/ { 
   in_dt = 0 
 }
 
-# W sekcji DependencyTrack - zmień enabled na true
-in_dt == 1 && /enabled:/ && /false/ {
-  sub(/false/, "true")
+# W sekcji DT - zmień enabled: false na true (tylko pierwsza wartość enabled po dependencyTrack)
+in_dt == 1 && /^[[:space:]]*enabled: false/ && !dt_enabled_done {
+  sub(/enabled: false/, "enabled: true")
+  dt_enabled_done = 1
   print
   next
 }
 
-# W sekcji DependencyTrack - zmień hostname
-in_dt == 1 && /hostname:/ && /dependency-track/ && /nip\.io/ {
+# W sekcji DT - zmień hostname z nip.io
+in_dt == 1 && /hostname:/ && /nip\.io/ {
   sub(/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/, new_ip)
   print
   next
 }
 
-# Wszystkie inne linie
 { print }
 ' "$VALUES_FILE" > "${VALUES_FILE}.tmp"
 
