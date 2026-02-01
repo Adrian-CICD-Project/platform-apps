@@ -19,7 +19,7 @@ applications:
         annotations:
           nginx.ingress.kubernetes.io/backend-protocol: HTTP
           nginx.ingress.kubernetes.io/proxy-body-size: "100m"
-        hostname: dependency-track.50.85.174.247.nip.io
+        hostname: dependency-track.20.67.126.22.nip.io
         path: /
 
       frontend:
