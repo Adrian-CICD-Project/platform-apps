@@ -8,7 +8,8 @@ RESOURCE_GROUP="rg-devops-poc01"
 CLUSTERS=("devops-poc01-test" "devops-poc01-prod")
 CLUSTER_TEST="devops-poc01-test"
 VALUES_FILE="charts/app-of-apps/values.yaml"
-GH_APP_SECRET="bootstrap/argocd-repositories-github-app.yaml"
+# GitHub App secrets are managed via External Secrets Operator (Azure Key Vault)
+# Template file (no real keys): bootstrap/argocd-repositories-github-app.yaml
 INGRESS_APP="bootstrap/ingress-nginx.yaml"
 MON_NS="monitoring"
 SECRET_NAME="alertmanager-gmail"
@@ -100,7 +101,7 @@ echo -e "${CYAN}Sprawdzanie wymaganych plików...${NC}"
 echo -e "${CYAN}════════════════════════════════════════════${NC}\n"
 
 check_file "$VALUES_FILE" "values.yaml"
-check_file "$GH_APP_SECRET" "GitHub App Secret"
+# GitHub App secrets are provisioned via External Secrets Operator (not from file)
 check_file "$INGRESS_APP" "Ingress Application"
 
 # ============================================
@@ -315,15 +316,15 @@ for CLUSTER in "${CLUSTERS[@]}"; do
   # Sprawdź ArgoCD
   check_argocd "${CLUSTER}" || continue
   
-  # Aplikuj GitHub App Secret (KLUCZOWE dla prywatnych repo)
-  if [ -f "$GH_APP_SECRET" ]; then
-    echo ""
-    echo "→ Aplikowanie GitHub App Secret (argocd-repositories)..."
-    kubectl apply -f "$GH_APP_SECRET"
-    echo -e "${GREEN}✓ GitHub App Secret aplikowany - ArgoCD może teraz pobierać z prywatnego repo${NC}"
+  # GitHub App Secrets - managed via External Secrets Operator
+  echo ""
+  echo "→ Sprawdzanie GitHub App Secrets (zarządzane przez External Secrets)..."
+  if kubectl get secret repo-platform-apps -n argocd &>/dev/null; then
+    echo -e "${GREEN}✓ GitHub App Secrets obecne w klastrze (External Secrets)${NC}"
   else
-    echo -e "${YELLOW}⚠️  Brak pliku: $GH_APP_SECRET${NC}"
-    echo "   ArgoCD może mieć problem z dostępem do prywatnego repo!"
+    echo -e "${YELLOW}⚠️  Brak GitHub App Secrets w namespace argocd${NC}"
+    echo "   Upewnij się, że External Secrets Operator jest skonfigurowany i SecretStore działa."
+    echo "   Szczegóły: docs/external-secrets-setup.md"
   fi
   
   # Określ właściwy bootstrap file
