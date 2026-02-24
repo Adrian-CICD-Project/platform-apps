@@ -11,7 +11,7 @@ spec:
     path: charts/app-of-apps
     helm:
       valueFiles:
-        - values.yaml
+        - values-prod.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
