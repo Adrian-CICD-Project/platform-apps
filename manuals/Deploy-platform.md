@@ -28,10 +28,13 @@ STEP 3 & 4: Cluster Bootstrap via ArgoCD
 
 For each cluster (test/prod):
 
-Applies argocd-repositories-github-app.yaml (repo access)
+Checks if External Secrets Operator is installed and applies ClusterSecretStore + ExternalSecret CRDs (bootstrap/external-secrets-config.yaml)
+Verifies that GitHub App Secrets are present in the argocd namespace (provisioned via External Secrets from Azure Key Vault)
 Applies root Application (app-of-apps-test/prod.yaml)
 Waits for ArgoCD synchronization
 Displays status and list of child applications
+
+Note: GitHub App secrets are NO LONGER stored in the repository. They are delivered via Azure Key Vault + External Secrets Operator.
 
 
 

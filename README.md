@@ -22,8 +22,11 @@ The toolset includes:
 - **SonarQube (SLIM profile for TEST)**  
   Minimal CPU/RAM resources and lightweight PostgreSQL.
 
-- **Dependency-Track (SLIM profile for TEST)**  
+- **Dependency-Track (SLIM profile for TEST)**
   Minimal replicas and resources.
+
+- **External Secrets Operator**
+  Securely delivers secrets from Azure Key Vault to Kubernetes clusters.
 
 This repository ensures repeatable GitOps deployment of platform services.
 
@@ -33,13 +36,23 @@ This repository ensures repeatable GitOps deployment of platform services.
 
 ```
 platform-apps/
+├── bootstrap/
+│   ├── app-of-apps-test.yaml            # ArgoCD root app (TEST)
+│   ├── app-of-apps-prod.yaml            # ArgoCD root app (PROD) → values-prod.yaml
+│   ├── argocd-repositories-github-app.yaml  # Template (no secrets!)
+│   ├── external-secrets-config.yaml     # ClusterSecretStore + ExternalSecrets
+│   └── ingress-nginx.yaml
 ├── charts/
 │   └── app-of-apps/
 │       ├── Chart.yaml
 │       ├── templates/
-│       │   └── applications.yaml     # generates ArgoCD applications
-│       ├── values.yaml               # SLIM configuration (TEST)
-│       └── values-prod.yaml          # optional PRODUCTION overrides
+│       │   └── applications.yaml        # generates ArgoCD applications
+│       ├── values.yaml                  # TEST configuration
+│       └── values-prod.yaml             # PRODUCTION configuration
+├── scripts/
+│   ├── deploy-platform.sh
+│   └── get-access-info.sh
+├── manuals/
 └── README.md
 ```
 
@@ -129,13 +142,27 @@ The `expose_test_apps.sh` script can automate:
 
 ---
 
+## Secrets Management
+
+Secrets (GitHub App keys, tokens) are **never stored in Git**. They are managed via:
+
+1. **Azure Key Vault** — central secret store
+2. **External Secrets Operator** — pulls secrets from Key Vault into Kubernetes
+3. **ClusterSecretStore + ExternalSecret CRDs** — defined in `bootstrap/external-secrets-config.yaml`
+
+> **Setup guide:** See `infra-azure/docs/key-vault-external-secrets-setup.md`
+
+---
+
 ## Credentials and Access (TEST)
 
 | Service          | Username | Password                                                                                              |
 | ---------------- | -------- | ----------------------------------------------------------------------------------------------------- |
 | ArgoCD           | admin    | `kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath='{.data.password}' \| base64 -d` |
-| SonarQube        | admin    | admin (default)                                                                                       |
-| Dependency-Track | admin    | admin (default)                                                                                       |
+| SonarQube        | admin    | Change default password on first login                                                                |
+| Dependency-Track | admin    | Change default password on first login                                                                |
+
+> **Important:** Always change default passwords after first login.
 
 ---
 
