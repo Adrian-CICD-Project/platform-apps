@@ -318,13 +318,25 @@ for CLUSTER in "${CLUSTERS[@]}"; do
   
   # GitHub App Secrets - managed via External Secrets Operator
   echo ""
-  echo "→ Sprawdzanie GitHub App Secrets (zarządzane przez External Secrets)..."
+  echo "→ Sprawdzanie External Secrets Operator..."
+  if kubectl get deployment -n external-secrets external-secrets &>/dev/null; then
+    echo -e "${GREEN}✓ External Secrets Operator jest zainstalowany${NC}"
+    echo "→ Aplikowanie ClusterSecretStore i ExternalSecrets..."
+    kubectl apply -f "bootstrap/external-secrets-config.yaml"
+    echo -e "${GREEN}✓ ExternalSecrets skonfigurowane - sekrety będą pobierane z Azure Key Vault${NC}"
+  else
+    echo -e "${YELLOW}⚠️  External Secrets Operator nie jest jeszcze zainstalowany${NC}"
+    echo "   Zostanie zainstalowany przez ArgoCD app-of-apps. Po instalacji uruchom ponownie skrypt."
+  fi
+
+  # Sprawdź czy sekrety ArgoCD repo są dostępne
+  echo ""
+  echo "→ Sprawdzanie GitHub App Secrets..."
   if kubectl get secret repo-platform-apps -n argocd &>/dev/null; then
-    echo -e "${GREEN}✓ GitHub App Secrets obecne w klastrze (External Secrets)${NC}"
+    echo -e "${GREEN}✓ GitHub App Secrets obecne w klastrze${NC}"
   else
     echo -e "${YELLOW}⚠️  Brak GitHub App Secrets w namespace argocd${NC}"
-    echo "   Upewnij się, że External Secrets Operator jest skonfigurowany i SecretStore działa."
-    echo "   Szczegóły: docs/external-secrets-setup.md"
+    echo "   Poczekaj aż External Secrets zsynchronizuje sekrety z Key Vault."
   fi
   
   # Określ właściwy bootstrap file

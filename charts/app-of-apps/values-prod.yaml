@@ -160,3 +160,26 @@ applications:
 
     values: |
       replicaCount: 1
+
+  #############################################
+  # EXTERNAL SECRETS OPERATOR
+  #############################################
+  external-secrets:
+    enabled: true
+    name: external-secrets
+    namespace: external-secrets
+
+    helmRepoUrl: https://charts.external-secrets.io
+    chart: external-secrets
+    chartVersion: 0.12.1
+
+    values: |
+      installCRDs: true
+      replicaCount: 1
+      resources:
+        requests:
+          cpu: 50m
+          memory: 128Mi
+        limits:
+          cpu: 200m
+          memory: 256Mi
