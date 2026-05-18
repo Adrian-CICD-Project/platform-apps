@@ -1,10 +1,10 @@
 applications:
   #############################################
-  # DEPENDENCY TRACK (WYŁĄCZONY)
+  # DEPENDENCY TRACK
   #############################################
 
   dependencyTrack:
-    enabled: false
+    enabled: true
     name: dependency-track
     namespace: dependency-track
 
