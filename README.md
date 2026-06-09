@@ -25,8 +25,22 @@ The toolset includes:
 - **Dependency-Track (SLIM profile for TEST)**
   Minimal replicas and resources.
 
+- **Grafana (TEST)**
+  Standalone chart with preconfigured Prometheus datasource and auto-provisioned
+  dashboards from grafana.com (JVM Micrometer 4701, Spring Boot Statistics 11378).
+  Exposed via LoadBalancer; admin password generated into the `grafana` secret.
+
+- **Argo Rollouts (PROD only)**
+  Controller enabling canary deployments for `adrian-java-app` on the PROD cluster
+  (enabled in `values-prod.yaml`, explicitly disabled on TEST).
+
 - **External Secrets Operator**
   Securely delivers secrets from Azure Key Vault to Kubernetes clusters.
+
+> **Helm values merging:** ArgoCD merges the chart's default `values.yaml` with
+> `values-prod.yaml` on PROD. Apps that must not run on PROD (SonarQube,
+> Dependency-Track, Grafana) are therefore **explicitly disabled** in
+> `values-prod.yaml` — do not remove those entries.
 
 This repository ensures repeatable GitOps deployment of platform services.
 
@@ -168,14 +182,16 @@ Secrets (GitHub App keys, tokens) are **never stored in Git**. They are managed 
 
 ## Next Steps (Phase 3)
 
-The repository is prepared for further expansion:
+Already implemented:
 
-- Define alert rules (PrometheusRule)
-- Add HTTP 500 alerts
-- Configure email notifications (AlertmanagerConfig)
-- Add ServiceMonitor for applications
-- Create Grafana dashboards
+- ✅ HTTP 500 alert rule (Prometheus) + email notifications (Alertmanager / Gmail SMTP)
+- ✅ Grafana dashboards (JVM Micrometer, Spring Boot Statistics)
+- ✅ Argo Rollouts canary on PROD
+
+Possible further expansion:
+
 - Optionally add logging (Elastic / Loki) or tracing (Tempo)
+- Argo Rollouts analysis steps (automatic rollback based on Prometheus metrics)
 
 Everything flows through: **Git → ArgoCD → Cluster**
 

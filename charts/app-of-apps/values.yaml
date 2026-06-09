@@ -216,6 +216,74 @@ applications:
       monitoringPasscode: "sonar-monitoring"
 
   #############################################
+  # GRAFANA – DASHBOARDY (TEST)
+  #############################################
+  grafana:
+    enabled: true
+    name: grafana
+    namespace: monitoring
+
+    helmRepoUrl: https://grafana.github.io/helm-charts
+    chart: grafana
+    chartVersion: 8.8.2
+
+    values: |
+      replicas: 1
+
+      # Hasło admina generuje chart i zapisuje w secrecie "grafana":
+      # kubectl get secret grafana -n monitoring -o jsonpath="{.data.admin-password}" | base64 -d
+      adminUser: admin
+
+      service:
+        type: LoadBalancer
+        port: 80
+
+      persistence:
+        enabled: false
+
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          cpu: 300m
+          memory: 256Mi
+
+      datasources:
+        datasources.yaml:
+          apiVersion: 1
+          datasources:
+            - name: Prometheus
+              type: prometheus
+              access: proxy
+              url: http://prometheus-server.monitoring.svc.cluster.local
+              isDefault: true
+
+      dashboardProviders:
+        dashboardproviders.yaml:
+          apiVersion: 1
+          providers:
+            - name: default
+              orgId: 1
+              folder: ""
+              type: file
+              disableDeletion: false
+              options:
+                path: /var/lib/grafana/dashboards/default
+
+      # Gotowe dashboardy z grafana.com (pobierane przy starcie poda)
+      dashboards:
+        default:
+          jvm-micrometer:
+            gnetId: 4701
+            revision: 10
+            datasource: Prometheus
+          spring-boot-statistics:
+            gnetId: 11378
+            revision: 1
+            datasource: Prometheus
+
+  #############################################
   # EXTERNAL SECRETS OPERATOR
   #############################################
   external-secrets:

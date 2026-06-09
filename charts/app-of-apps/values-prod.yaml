@@ -162,6 +162,38 @@ applications:
       replicaCount: 1
 
   #############################################
+  # GRAFANA (WYŁĄCZONA na PROD - działa na TEST)
+  #############################################
+  grafana:
+    enabled: false
+
+  #############################################
+  # ARGO ROLLOUTS – CANARY DEPLOYMENTS (PROD)
+  #############################################
+  argoRollouts:
+    enabled: true
+    name: argo-rollouts
+    namespace: argo-rollouts
+
+    helmRepoUrl: https://argoproj.github.io/argo-helm
+    chart: argo-rollouts
+    chartVersion: 2.38.0
+
+    values: |
+      controller:
+        replicas: 1
+        resources:
+          requests:
+            cpu: 50m
+            memory: 128Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
+
+      dashboard:
+        enabled: false
+
+  #############################################
   # EXTERNAL SECRETS OPERATOR
   #############################################
   external-secrets:
